@@ -12,16 +12,16 @@ Look at the schematic for the Nokia1202 LCD BoosterPack. Complete the following 
 
 | Name | Pin # | Type | PxDIR| PxREN | PxOUT |
 |:-: | :-: | :-: | :-: | :-: | :-: |
-|GND | | | | |  |
-| RST |   |   |   |   |   |
-| P1.4 |   |   |   |   |   |   
-| MOSI|  |   |   |   |   |   
-| SCLK |   |   |   |   |   |   
-| VCC |   |   |   |   |   |  
-| S1 |   |   |   |   |   | 
-| S2 |   |   |   |   |   | 
-| S3 |   |   |   |   |   | 
-| S4 || | | | | 
+|GND |20 | Power | - | - | - |
+| RST | 8 | Out | 1 | 0 | 1 |
+| P1.4 | 6 | Out | 1 | 0 | 1 |   
+| MOSI| 15 | Out | 1 | 0 | 1 |   
+| SCLK | 7 | Out | 1 | 0 | 1 |   
+| VCC | 1 | Power | - | - | - |  
+| S1 | 9 | In | 0 | 1 | 1 | 
+| S2 | 10 | In | 0 | 1 | 1 | 
+| S3 | 11 | In | 0 | 1 | 1 | 
+| S4 | 12 | In | 0 | 1 | 1 | 
 
 
 ### Configure the MSP430
@@ -35,10 +35,10 @@ mov.b	#LCD1202_RESET_PIN, & D
 ```
 | Mystery Label | Register|
 |:-: |:-: |
-| A|  |
-| B |  |
-| C |  |
-| D |  |
+| A| P1DIR |
+| B | P1OUT |
+| C | P2DIR |
+| D | P2OUT |
 
 
 The following initializes the SPI subsystem of the MSP430.  For each of the bits listed in the table below, identify how the code-snippet configures that pin and what function is realized by that setting.  For example, setting the UCMSB bit of the UCB0CTL0 register forces the SPI subsystem to output the bits starting from the LSB.  Also, list the bit position that each occupies in its associated register.
@@ -50,12 +50,14 @@ The following initializes the SPI subsystem of the MSP430.  For each of the bits
 
 | ID | Bit | Function as set in the code |
 |:-:|:-:|:-:|
-| UCCKPH | | |
-| UCMSB | | |
-| UCMST | | |
-| UCSYNCH| | |
-| UCSSEL_2|  | |
-| UCSWRST| | |
+| UCCKPH | 7 | Clock Phase Select -Data is captured on the first UCLK edge and changed on the following edge  |
+| UCMSB | 5 | MSB first select. Controls the direction of the receive and transmit shift register – select LSB first |
+| UCMST | 3 | Master mode select - slave |
+| UCSYNCH| 0 | Synchronous mode enable – Synchronous mode |
+| UCSSEL_2| 7-6 | USCI clock source select. These bits select the BRCLK source clock in master mode. UCxCLK is always
+used in slave mode.
+ |
+| UCSWRST| 0 | Software reset enable |
 
 ### Communicate to the Nokia1202 display
 The following code communicates one byte to the Nokia 1202 display using its 9-bit protocol.  Use this code to draw a timing diagram of the expected behavior of LCD1202_CS_PIN, LCD1202_SCLK_PIN, LCD1202_MOSI_PINs from the begining of this subroutine to the end.  Make sure that you clearly show the relationship of the edges in the clk and data waveforms.
@@ -177,12 +179,12 @@ Complete the table below.  To answer this question you will have to use some com
 
 | Symbolic Constant | Hex | Function |
 | :-: | :-: | :-: |
-|#STE2007_RESET| | |
-|#STE2007_DISPLAYALLPOINTSOFF| | |
-|#STE2007_POWERCONTROL| | | 
-|#STE2007_POWERCTRL_ALL_ON | | |
-|#STE2007_DISPLAYNORMAL | | |
-|#STE2007_DISPLAYON | | |
+|#STE2007_RESET| E2 | Internal Reset |
+|#STE2007_DISPLAYALLPOINTSOFF| A4 | LCD display 0: normal display |
+|#STE2007_POWERCONTROL| - | Sets the on–chip power supply circuit operating mode | 
+|#STE2007_POWERCTRL_ALL_ON | 2F | Booster : ON Voltage regulator : ON Voltage follower : ON |
+|#STE2007_DISPLAYNORMAL | A6 |  LCD display 0: normal |
+|#STE2007_DISPLAYON | AF | LCD display 1: ON |
 
 (This marks the end of the Mega Prelab.)
 ---------------------------------------------------------------
