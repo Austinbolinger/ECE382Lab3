@@ -202,7 +202,7 @@ When SW3 is detected as being pressed and released (lines 56-62), the MSP430 gen
 |:-:|:-:|:-:|:-:|
 | 66 | move #NOKIA_DATA | move #0xE7 | move #1 into r12 - cmd vs data, this is the pattern that is drawn 1110 0111 |
 | 276 | #NOKIA_CMD | 1011 0000 | cmd, row number location on page  |
-| 288 | #NOKIA_CMD | 1010 0000 | cmd,  |
+| 288 | #NOKIA_CMD | 0001 0000 | cmd,  |
 | 294 | #NOKIA_CMD | mask upper bits to 0000 1111 | cmd, resets r13 (row) |
 Configure the logic analyzer to capture the waveform generated when the SW3 button is pressed and released. Decode the data bits of each 9-bit waveform by separating out the MSB, which indicates command or data. Explain how the packet contents correspond to what was drawn on the display.  Be specific with the relationship between the data values and what and where the pixels are drawn
 
