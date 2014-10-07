@@ -208,10 +208,10 @@ Configure the logic analyzer to capture the waveform generated when the SW3 butt
 
 |Line|Command/Data|8-bit packet|
 |:-:|:-:|:-:|
-||||
-||||
-||||
-|||||
+| 66 | Data | E7 |
+| 276 | Commamd | B4 |
+| 288 | Command | 10 |
+| 294 | Commnad | 04 ||
 Hint: in order to probe the signals while the LCD is connected to the LaunchPad, you will need to use the LaunchPad header pins with the probe hook grippers. Be careful when attaching and detaching the grippers to the pins, as they may easily bend and then no longer serve you well. Also, don't forget the ground pin!<br>
 ![Logic analyzer connection](left.jpg)<br>
 You will get a waveform similar to that shown below. Note that the command/data bit is significantly far away from the 8 data bits. <br>
