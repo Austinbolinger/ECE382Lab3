@@ -220,7 +220,7 @@ Next, setup the Logic Analyzer to capture the RESET signal on a falling edge. Me
 How many counts does the firmware loop count down from? 
 Using the delay you just measured and the number of counts, calculate the amount of time each iteration of the delay loop consumes.
 
-The reset counter counts down from 0xFFFF (65535) to zero. But, the delay from the measured reset is 6.544 micro seconds.
+The reset counter counts down from 0xFFFF (65535) to zero. But, the delay from the measured reset is 6.544 micro seconds. So each loop is 6.544u/65535 or 0.998 nano seconds.
 
 ###Writing modes
 The native write operation to the Nokia 1202 will overwrite any information that is was on the display with new information.  However, that may not be the best course of action in your application.  The new bits being added to the image may be merged using the AND, OR, XOR operators.  To do this treat a black pixel as a logic 1 and a white pixel as a logic 0.  The pixel values from the same locations are combined using a logical operator and placed at the corresponding location in the destination imaged.
