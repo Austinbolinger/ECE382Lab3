@@ -229,7 +229,7 @@ Import the following image into a paint program and show the result of the opera
 ## Functionality
 Required functionality: Create a block on the LCD that is 8x8 pixels.  The location of the block must be passed into the subroutine via r12 and r13.
 A functionality: Move the 8-pixel block one block in the direction of the pressed button (up, down, left, right).
-(Under construction)
+
 
 ## Grading
 
