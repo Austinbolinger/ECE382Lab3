@@ -231,6 +231,28 @@ Required functionality: Create a block on the LCD that is 8x8 pixels.  The locat
 A functionality: Move the 8-pixel block one block in the direction of the pressed button (up, down, left, right).
 
 
+##Logic Analysis
+Each package shows a step from the table above. It looks at line 66, 276, 288, and 294.
+![Package 1](Logic1.jpg)<br>
+Package 1 shows R13 value of E7 and the Data bit.
+![Package 2](Logic2.jpg)<br>
+Package 2 shows R13 value of B4. It should read B0, but I had run the code four times and the mask function only masks the most significant nibble. Since I was on row for B4 showed up in the logic analyzer.
+![Package 3 ](Logic3.jpg)<br>
+Package 3 shows 10 just like line 288.
+![Package 4 ](Logic4.jpg)<br>
+Package 4 has 04. Again, it should read 00, but I am on row 4 so a 4 is displayed.
+![Reset ](resetLength.jpg)<br>
+The reset counter counts down from 0xFFFF (65535) to zero. But, the delay from the measured reset is 6.544 micro seconds. So each loop is 6.544u/65535 or 0.998 nano seconds.
+
+##Required Code
+https://github.com/Austinbolinger/ECE382Lab3/blob/master/requiredFunctionality
+In this code I just added 4 lines of code and modified one other line. I change the pattern in R13 from E7 to FF in order to make a solid line instead of a double dashed line. I added a decrementing loop to call set address 8 times for each button pressed. This may not work like it is suppose to but it gets the job done.
+
+##A Functionality
+https://github.com/Austinbolinger/ECE382Lab3/blob/master/AFunctionality
+This code took a while to understand. I started off with identifying how to get the box to start in the center of the screen. After much tampering, I found out that I just needed to delete an increment given and initialize R10, row, and R11, column, to what I wanted them to be. Next I rearranged the code so that each time I called makeBox It would do the same thing and I would just need to pass in different cursor locations.After that, I worked on getting the other buttons to be recognized. I started with just one button. After many hours, I received help from Dr. Coulston. He helped me fix my problem with pressing and releasing the buton. I had the code for press but not for release. This lead to the box appearing in a random position depeding on howmany microseconds I held down and allowed the program to run through. After he showed me how to test for a release. I was able to copy the code for each button. The last step was to apply the correct column or row change in order to pass the right values into makeBox. A few trails and errors lead to code that works like a charm.
+
+
 ## Grading
 
 || Item | Grade | Points | Out of | Date | Due |
