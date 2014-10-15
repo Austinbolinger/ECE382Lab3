@@ -253,6 +253,9 @@ https://github.com/Austinbolinger/ECE382Lab3/blob/master/AFunctionality
 This code took a while to understand. I started off with identifying how to get the box to start in the center of the screen. After much tampering, I found out that I just needed to delete an increment given and initialize R10, row, and R11, column, to what I wanted them to be. Next I rearranged the code so that each time I called makeBox It would do the same thing and I would just need to pass in different cursor locations.After that, I worked on getting the other buttons to be recognized. I started with just one button. After many hours, I received help from Dr. Coulston. He helped me fix my problem with pressing and releasing the buton. I had the code for press but not for release. This lead to the box appearing in a random position depeding on howmany microseconds I held down and allowed the program to run through. After he showed me how to test for a release. I was able to copy the code for each button. The last step was to apply the correct column or row change in order to pass the right values into makeBox. A few trails and errors lead to code that works like a charm.
 
 
+##Documentation
+Dr. York helped me understand the mega prelab time wave form by walking me through it. Dr. York found an error in my coding. I was commenting out part of the working set address function. It messed up the whole program just enough to not let it work. Dr. Coulston helped me with button pressed and button released. I was stuck with just identifying the press and not accounting for the release. He walked me through C code for it and then assembly code for button release.
+
 ## Grading
 
 || Item | Grade | Points | Out of | Date | Due |
